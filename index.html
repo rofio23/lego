@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffcf00">
+  <meta name="description" content="BrickStore, boutique fictive de sets LEGO.">
+  <title>BrickStore | Boutique LEGO</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <div class="announcement">
+    🚚 Livraison gratuite fictive dès 80 € !
+  </div>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="#" class="logo" aria-label="Accueil BrickStore">
+        <span class="logo-icon">B</span>
+        <span>BRICK<span class="logo-red">STORE</span></span>
+      </a>
+
+      <form class="search" id="searchForm" role="search">
+        <input id="searchInput" type="search"
+          placeholder="Rechercher un set LEGO..."
+          aria-label="Rechercher un produit">
+        <button type="submit" aria-label="Rechercher">🔍</button>
+      </form>
+
+      <div class="header-actions">
+        <button class="icon-btn" id="favoritesBtn"
+          aria-label="Afficher les favoris">
+          ♡ <span id="favoritesCount">0</span>
+        </button>
+        <button class="cart-button" id="cartBtn">
+          🛒 <span class="cart-label">Panier</span>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <div class="nav-inner" id="navCategories">
+      <button class="nav-link active" data-category="Tous">Tous</button>
+      <button class="nav-link" data-category="Technic">Technic</button>
+      <button class="nav-link" data-category="City">City</button>
+      <button class="nav-link" data-category="Star Wars">Star Wars</button>
+      <button class="nav-link" data-category="Speed Champions">Voitures</button>
+      <button class="nav-link" data-category="Icons">Icons</button>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <span class="hero-tag">NOUVELLE COLLECTION</span>
+        <h1>Construis ton<br><span>univers.</span></h1>
+        <p>Découvre des sets incroyables et remplis ton panier
+          dans notre boutique de simulation LEGO.</p>
+        <a href="#catalogue" class="primary-btn">Découvrir les sets →</a>
+        <div class="hero-note">Boutique de démonstration · Aucun achat réel</div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="brick brick-red"></div>
+        <div class="brick brick-blue"></div>
+        <div class="brick brick-green"></div>
+        <div class="brick brick-yellow"></div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div>📦 <span>Des sets à découvrir</span></div>
+      <div>⭐ <span>Des collections populaires</span></div>
+      <div>🔒 <span>Simulation sans paiement</span></div>
+    </section>
+
+    <section class="catalogue" id="catalogue">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">LE CATALOGUE</span>
+          <h2>Nos sets LEGO</h2>
+          <p id="resultsCount">Chargement des produits...</p>
+        </div>
+        <select id="sortSelect" aria-label="Trier les produits">
+          <option value="default">Trier : populaires</option>
+          <option value="priceAsc">Prix croissant</option>
+          <option value="priceDesc">Prix décroissant</option>
+          <option value="name">Nom A-Z</option>
+        </select>
+      </div>
+
+      <div class="shop-layout">
+        <aside class="filters">
+          <h3>Filtres</h3>
+          <label for="categorySelect">Catégorie</label>
+          <select id="categorySelect">
+            <option value="Tous">Toutes les catégories</option>
+            <option value="Technic">Technic</option>
+            <option value="City">City</option>
+            <option value="Star Wars">Star Wars</option>
+            <option value="Speed Champions">Speed Champions</option>
+            <option value="Icons">Icons</option>
+          </select>
+
+          <label for="priceRange">Prix maximum</label>
+          <input type="range" id="priceRange"
+            min="20" max="500" step="10" value="500">
+          <div class="price-value" id="priceValue">500 €</div>
+
+          <button class="reset-btn" id="resetBtn">
+            Réinitialiser les filtres
+          </button>
+
+          <div class="filter-info">
+            🧱<br>
+            <strong>BrickStore</strong>
+            <p>Explore, collectionne et simule tes achats !</p>
+          </div>
+        </aside>
+
+        <div class="products" id="productsGrid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>
+      <h3>🧱 BRICKSTORE</h3>
+      <p>La passion de la construction.</p>
+    </div>
+    <div>
+      <strong>Informations</strong>
+      <p>Projet de simulation non commercial.</p>
+      <p>Site indépendant, non affilié au groupe LEGO.</p>
+    </div>
+    <p>© 2026 BrickStore · Projet fictif</p>
+  </footer>
+
+  <div class="overlay" id="overlay"></div>
+
+  <aside class="cart-panel" id="cartPanel"
+    role="dialog" aria-modal="true"
+    aria-label="Votre panier" aria-hidden="true">
+    <div class="cart-header">
+      <h2>🛒 Mon panier</h2>
+      <button id="closeCart" class="close-btn"
+        aria-label="Fermer le panier">✕</button>
+    </div>
+
+    <div id="cartItems" class="cart-items"></div>
+
+    <div class="cart-footer">
+      <div class="total-line">
+        <span>Sous-total</span>
+        <strong id="cartTotal">0,00 €</strong>
+      </div>
+      <p>Commande fictive, aucun paiement demandé.</p>
+      <button id="checkoutBtn" class="checkout-btn">
+        Simuler la commande
+      </button>
+      <button id="clearCartBtn" class="clear-btn">
+        Vider le panier
+      </button>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast" role="status"
+    aria-live="polite"></div>
+
+</body>
+</html>
